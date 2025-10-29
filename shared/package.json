@@ -1,0 +1,16 @@
+{
+  "name": "noschat-shared",
+  "version": "1.0.0",
+  "description": "Shared types and proto definitions for NosChat",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "shared",
+    "types",
+    "proto"
+  ],
+  "author": "NosChat Team",
+  "license": "MIT"
+}

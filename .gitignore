@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.local
+*.log
+logs
+.DS_Store
+.vscode
+.idea
+
+# SSL certificates
+nginx/ssl/*.pem
+nginx/ssl/*.key
+
+# Docker volumes
+data/

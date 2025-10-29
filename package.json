@@ -1,0 +1,32 @@
+{
+  "name": "noschat",
+  "version": "1.0.0",
+  "description": "Modern messaging service with WebSocket and gRPC",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --workspace=backend && npm install --workspace=frontend && npm install --workspace=shared",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "start": "npm run start --workspace=backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "chat",
+    "messaging",
+    "websocket",
+    "grpc",
+    "nodejs",
+    "react"
+  ],
+  "author": "NosChat Team",
+  "license": "MIT"
+}

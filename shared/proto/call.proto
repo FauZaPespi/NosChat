@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package call;
+
+service CallService {
+  // Initiate a call
+  rpc InitiateCall (CallRequest) returns (CallResponse);
+
+  // Accept a call
+  rpc AcceptCall (AcceptCallRequest) returns (CallResponse);
+
+  // Reject a call
+  rpc RejectCall (RejectCallRequest) returns (CallResponse);
+
+  // End a call
+  rpc EndCall (EndCallRequest) returns (CallResponse);
+
+  // Stream call signaling (ICE candidates, SDP offers/answers)
+  rpc SignalingStream (stream SignalingMessage) returns (stream SignalingMessage);
+}
+
+message CallRequest {
+  string caller_id = 1;
+  string callee_id = 2;
+  CallType call_type = 3;
+  string room_id = 4;
+}
+
+message AcceptCallRequest {
+  string call_id = 1;
+  string user_id = 2;
+}
+
+message RejectCallRequest {
+  string call_id = 1;
+  string user_id = 2;
+  string reason = 3;
+}
+
+message EndCallRequest {
+  string call_id = 1;
+  string user_id = 2;
+}
+
+message CallResponse {
+  bool success = 1;
+  string message = 2;
+  string call_id = 3;
+  CallStatus status = 4;
+}
+
+message SignalingMessage {
+  string call_id = 1;
+  string sender_id = 2;
+  string receiver_id = 3;
+  SignalingType type = 4;
+  string payload = 5; // JSON encoded SDP or ICE candidate
+}
+
+enum CallType {
+  AUDIO = 0;
+  VIDEO = 1;
+}
+
+enum CallStatus {
+  INITIATED = 0;
+  RINGING = 1;
+  ACCEPTED = 2;
+  REJECTED = 3;
+  ENDED = 4;
+  FAILED = 5;
+}
+
+enum SignalingType {
+  OFFER = 0;
+  ANSWER = 1;
+  ICE_CANDIDATE = 2;
+}
